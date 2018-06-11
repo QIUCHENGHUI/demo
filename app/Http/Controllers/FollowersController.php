@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\NewUserFollowNotification;
 use App\Repositories\UserRepository;
 use Auth;
 use Illuminate\Http\Request;
@@ -35,11 +36,11 @@ class FollowersController extends Controller
 
         if (count($followed['attached']) > 0) {
             $userToFollow->increment('followers_count');
-
+            $userToFollow->notify(new NewUserFollowNotification());
             return response()->json(['followed' => true]);
         }
         $userToFollow->decrement('followers_count');
-
+        $userToFollow->notify(new NewUserFollowNotification());
         return response()->json(['followed' => false]);
     }
 }

@@ -24,4 +24,7 @@ Route::resource('questions','QuestionsController',['names' =>[
 ]]);
 
 Route::post('questions/{question}/answer','AnswersController@store');
+
 Route::get('question/{question}/follow','QuestionFollowController@follow');
+
+Route::get('notifications','NotificationsController@index');
