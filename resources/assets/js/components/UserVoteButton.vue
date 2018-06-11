@@ -12,7 +12,7 @@
         props: ['answer','count'],
         mounted() {
             axios.post('/api/answer/' + this.answer +'/votes/users').then(response => {
-                this.voted = voted.data.followed
+                this.voted = response.data.voted
             });
         },
         data() {
